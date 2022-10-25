@@ -1,0 +1,4 @@
+[manifest]
+path = firmware
+[zephyr]
+base = os/zephyr
