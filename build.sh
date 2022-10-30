@@ -22,8 +22,6 @@ DOCKER_RUN_CMD="docker run -v $(pwd):/workdir $IMG_VERSION"
 install() {
     eval "$DOCKER_BUILD_CMD"
     eval "$DOCKER_RUN_CMD west update"
-    eval "$DOCKER_RUN_CMD pip3 install -r os/zephyr/scripts/requirements.txt"
-    eval "$DOCKER_RUN_CMD pip3 install -r os/bootloader/mcuboot/scripts/requirements.txt"
     eval "$DOCKER_RUN_CMD west blobs fetch"
 }
 

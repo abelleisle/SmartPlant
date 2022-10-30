@@ -129,7 +129,9 @@ RUN pip3 install wheel pip -U &&\
 		     statistics numpy \
 		     imgtool \
 		     protobuf \
-		     GitPython
+		     GitPython &&\
+	pip3 install -r https://raw.githubusercontent.com/zephyrproject-rtos/zephyr/master/scripts/requirements.txt && \
+	pip3 install -r https://raw.githubusercontent.com/zephyrproject-rtos/mcuboot/master/scripts/requirements.txt
 
 # Install LLVM and Clang
 RUN wget ${WGET_ARGS} https://apt.llvm.org/llvm.sh && \
