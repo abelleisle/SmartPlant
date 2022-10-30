@@ -123,8 +123,6 @@ RUN wget ${WGET_ARGS} https://github.com/Kitware/CMake/releases/download/v${CMAK
 
 # Install Python dependencies
 RUN pip3 install wheel pip -U &&\
-	pip3 install -r https://raw.githubusercontent.com/zephyrproject-rtos/zephyr/master/scripts/requirements.txt && \
-	pip3 install -r https://raw.githubusercontent.com/zephyrproject-rtos/mcuboot/master/scripts/requirements.txt && \
 	pip3 install west &&\
 	pip3 install sh &&\
 	pip3 install awscli PyGithub junitparser pylint \
@@ -160,10 +158,10 @@ RUN mkdir -p /opt/protoc && \
 # Install Zephyr SDK
 RUN mkdir -p /opt/toolchains && \
 	cd /opt/toolchains && \
-	wget ${WGET_ARGS} https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v${ZSDK_VERSION}/zephyr-sdk-${ZSDK_VERSION}_linux-${HOSTTYPE}.tar.gz && \
-	tar xf zephyr-sdk-${ZSDK_VERSION}_linux-${HOSTTYPE}.tar.gz && \
+	wget ${WGET_ARGS} https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v${ZSDK_VERSION}/zephyr-sdk-${ZSDK_VERSION}_linux-${HOSTTYPE}_minimal.tar.gz && \
+	tar xf zephyr-sdk-${ZSDK_VERSION}_linux-${HOSTTYPE}_minimal.tar.gz && \
 	zephyr-sdk-${ZSDK_VERSION}/setup.sh -t xtensa-espressif_esp32_zephyr-elf -h -c && \
-	rm zephyr-sdk-${ZSDK_VERSION}_linux-${HOSTTYPE}.tar.gz
+	rm zephyr-sdk-${ZSDK_VERSION}_linux-${HOSTTYPE}_minimal.tar.gz
 
 # Clean up stale packages
 RUN apt-get clean -y && \
@@ -173,7 +171,7 @@ RUN apt-get clean -y && \
 # Create 'user' account
 RUN groupadd -g $GID -o user
 
-RUN useradd -u $UID -m -g user -G plugdev dialout user \
+RUN useradd -u $UID -m -g user -G plugdev,dialout user \
 	&& echo 'user ALL = NOPASSWD: ALL' > /etc/sudoers.d/user \
 	&& chmod 0440 /etc/sudoers.d/user
 
