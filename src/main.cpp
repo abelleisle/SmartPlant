@@ -1,14 +1,18 @@
 #define ETL_NO_STL
 
-#include <Embedded_Template_Library.h> // Mandatory for Arduino IDE only
+#include <Arduino.h>
+
 #include <etl/vector.h>
 
 void setup()
 {
-    etl::vector<int, 16> vec;
+    Serial.begin(115200);
+    Serial.println("Initializing Analog Sensor");
 }
 
 void loop()
 {
-
+    int sensorValue = analogRead(A0);
+    Serial.println(sensorValue);
+    delay(500);
 }
