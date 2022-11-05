@@ -1,1 +1,0 @@
-add_subdirectory_ifdef(CONFIG_SOIL_MOISTURE soil_moisture)

@@ -1,3 +1,0 @@
-if SENSOR
-rsource "soil_moisture/Kconfig"
-endif # SENSOR
